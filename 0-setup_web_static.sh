@@ -4,9 +4,9 @@ sudo apt update
 sudo apt install -y nginx
 sudo mkdir -p /data/web_static/releases/test/
 sudo mkdir -p /data/web_static/shared/
-echo 'Hi, I'\''m Deborah Jimmy, a student of alx' > /data/web_static/releases/test/index.html
+echo 'Hi, I'\''m Tester, a student of alx' > /data/web_static/releases/test/index.html
 sudo ln -sf /data/web_static/releases/test/ /data/web_static/current
-sudo chown -R ubuntu:ubuntu /data/
+sudo chown -R vagrant /data/
 CONFIG="server {
         listen 80 default_server;
         listen [::]:80 default_server;
@@ -36,6 +36,8 @@ CONFIG="server {
                 alias /data/web_static/current/;       
         }
 }"
-
+sudo nginx -t
+sudo ls -l /etc/nginx/sites-enabled
+sudo lsattr /etc/nginx/sites-enabled/default.save
 bash -c "echo -e '$CONFIG' > /etc/nginx/sites-available/default"
 sudo service nginx restart
